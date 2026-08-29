@@ -95,10 +95,10 @@ function CookieSettingsPage() {
                   <button
                     type="button"
                     onClick={() => saveChoice("rejected")}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/70 bg-background px-5 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold hover:text-background"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/20 bg-foreground px-5 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-background shadow-soft transition-colors hover:bg-foreground/88"
                   >
                     <X size={14} />
-                    Reject
+                    Reject Analytics
                   </button>
                   <button
                     type="button"
@@ -106,7 +106,7 @@ function CookieSettingsPage() {
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-5 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-background shadow-gold transition-colors hover:bg-gold-bright"
                   >
                     <Check size={14} />
-                    Accept
+                    Accept Analytics
                   </button>
                 </div>
               </div>

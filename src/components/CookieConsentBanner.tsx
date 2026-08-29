@@ -56,16 +56,16 @@ export function CookieConsentBanner() {
           <button
             type="button"
             onClick={() => setCookieConsent("rejected")}
-            className="inline-flex items-center justify-center rounded-full border border-gold/70 bg-background px-5 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold hover:text-background"
+            className="inline-flex items-center justify-center rounded-full border border-foreground/20 bg-foreground px-5 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-background shadow-soft transition-colors hover:bg-foreground/88"
           >
-            Reject
+            Reject Analytics
           </button>
           <button
             type="button"
             onClick={() => setCookieConsent("accepted")}
             className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-background shadow-gold transition-colors hover:bg-gold-bright"
           >
-            Accept
+            Accept Analytics
           </button>
           <Link
             to="/cookie-settings"
