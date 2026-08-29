@@ -1,5 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 import appCss from "../styles.css?url";
 
@@ -88,7 +90,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <CookieConsentBanner />
+          <GoogleAnalytics />
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>

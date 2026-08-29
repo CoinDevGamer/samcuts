@@ -499,6 +499,29 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
   }
+  .policy-content {
+    color: var(--muted-foreground);
+  }
+  .policy-content h2 {
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    line-height: 1.15;
+    color: var(--foreground);
+  }
+  .policy-content h2:first-child {
+    margin-top: 0;
+  }
+  .policy-content p {
+    margin-top: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .policy-content a {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
 @keyframes fade-up {

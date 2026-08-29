@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as CookieSettingsRouteImport } from './routes/cookie-settings'
+import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -20,9 +23,24 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookieSettingsRoute = CookieSettingsRouteImport.update({
+  id: '/cookie-settings',
+  path: '/cookie-settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiePolicyRoute = CookiePolicyRouteImport.update({
+  id: '/cookie-policy',
+  path: '/cookie-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -45,14 +63,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/cookie-settings': typeof CookieSettingsRoute
   '/gallery': typeof GalleryRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/cookie-settings': typeof CookieSettingsRoute
   '/gallery': typeof GalleryRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRoutesById {
@@ -60,22 +84,53 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/cookie-settings': typeof CookieSettingsRoute
   '/gallery': typeof GalleryRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/gallery' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/cookie-policy'
+    | '/cookie-settings'
+    | '/gallery'
+    | '/privacy-policy'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/gallery' | '/services'
-  id: '__root__' | '/' | '/about' | '/contact' | '/gallery' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/cookie-policy'
+    | '/cookie-settings'
+    | '/gallery'
+    | '/privacy-policy'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/cookie-policy'
+    | '/cookie-settings'
+    | '/gallery'
+    | '/privacy-policy'
+    | '/services'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  CookiePolicyRoute: typeof CookiePolicyRoute
+  CookieSettingsRoute: typeof CookieSettingsRoute
   GalleryRoute: typeof GalleryRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ServicesRoute: typeof ServicesRoute
 }
 
@@ -88,11 +143,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookie-settings': {
+      id: '/cookie-settings'
+      path: '/cookie-settings'
+      fullPath: '/cookie-settings'
+      preLoaderRoute: typeof CookieSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookie-policy': {
+      id: '/cookie-policy'
+      path: '/cookie-policy'
+      fullPath: '/cookie-policy'
+      preLoaderRoute: typeof CookiePolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -123,7 +199,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  CookiePolicyRoute: CookiePolicyRoute,
+  CookieSettingsRoute: CookieSettingsRoute,
   GalleryRoute: GalleryRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ServicesRoute: ServicesRoute,
 }
 export const routeTree = rootRouteImport

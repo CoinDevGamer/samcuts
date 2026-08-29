@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Layout } from "@/components/Layout";
 import { SectionHeading } from "@/components/SectionHeading";
+import { ConsentRequiredPanel } from "@/components/ConsentRequiredPanel";
+import { COOKIE_CONSENT_EVENT, getCookieConsent } from "@/lib/cookieConsent";
 import {
   ArrowRight,
   Phone,
@@ -129,6 +132,9 @@ const servicePreview = [
 
 const googleMapsUrl =
   "https://www.google.com/maps/search/?api=1&query=Sam%27s%20Cuts%2C%20286%20Colne%20Rd%2C%20Burnley%20BB10%201DZ";
+
+const googleMapEmbedUrl =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2356.127547685189!2d-2.2367981233591347!3d53.80501407242583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487b91cdb1ee6387%3A0x702784a60de6bc67!2sSam%27s%20Cuts!5e0!3m2!1sen!2suk!4v1778667628398!5m2!1sen!2suk";
 
 const googleReviews = [
   {
@@ -775,18 +781,7 @@ function HomePage() {
             className="mt-10 overflow-hidden border border-gold/20 bg-background shadow-soft"
           >
             <div className="relative min-h-[460px]">
-              <iframe
-                title="Sam's Cuts Burnley location map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2356.127547685189!2d-2.2367981233591347!3d53.80501407242583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487b91cdb1ee6387%3A0x702784a60de6bc67!2sSam%27s%20Cuts!5e0!3m2!1sen!2suk!4v1778667628398!5m2!1sen!2suk"
-                width="100%"
-                height="460"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 h-full w-full"
-                style={{ border: 0, filter: "saturate(0.85) contrast(1.08) brightness(0.88)" }}
-              />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,var(--background)_0%,color-mix(in_oklab,var(--background)_75%,transparent)_28%,transparent_62%),linear-gradient(0deg,var(--background)_0%,transparent_34%)]" />
+              <ConsentAwareMap />
               <div className="absolute left-5 top-5 max-w-sm border border-gold/25 bg-background/90 px-6 py-5 shadow-soft backdrop-blur-md md:left-8 md:top-8">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center border border-gold/35 bg-gold/10 text-gold">
@@ -874,6 +869,44 @@ function HomePage() {
         </div>
       </section>
     </Layout>
+  );
+}
+
+function ConsentAwareMap() {
+  const [canLoadMap, setCanLoadMap] = useState(false);
+
+  useEffect(() => {
+    const updateConsent = () => {
+      setCanLoadMap(getCookieConsent() === "accepted");
+    };
+
+    updateConsent();
+    window.addEventListener(COOKIE_CONSENT_EVENT, updateConsent);
+
+    return () => {
+      window.removeEventListener(COOKIE_CONSENT_EVENT, updateConsent);
+    };
+  }, []);
+
+  if (!canLoadMap) {
+    return <ConsentRequiredPanel />;
+  }
+
+  return (
+    <>
+      <iframe
+        title="Sam's Cuts Burnley location map"
+        src={googleMapEmbedUrl}
+        width="100%"
+        height="460"
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        className="absolute inset-0 h-full w-full"
+        style={{ border: 0, filter: "saturate(0.85) contrast(1.08) brightness(0.88)" }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,var(--background)_0%,color-mix(in_oklab,var(--background)_75%,transparent)_28%,transparent_62%),linear-gradient(0deg,var(--background)_0%,transparent_34%)]" />
+    </>
   );
 }
 

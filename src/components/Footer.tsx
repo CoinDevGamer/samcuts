@@ -143,7 +143,17 @@ export function Footer() {
       <div className="border-t border-border/80 relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Sam's Cuts Burnley. All rights reserved.</div>
-          <div className="uppercase tracking-[0.2em]">Best Barber in Burnley</div>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <Link to="/cookie-settings" className="hover:text-gold transition-colors">
+              Cookie Settings
+            </Link>
+            <Link to="/cookie-policy" className="hover:text-gold transition-colors">
+              Cookie Policy
+            </Link>
+            <Link to="/privacy-policy" className="hover:text-gold transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
